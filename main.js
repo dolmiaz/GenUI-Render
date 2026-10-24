@@ -806,10 +806,6 @@ class JsxRenderer {
     const ttl = head.createSpan({ cls: 'genui-writing-title' });
     setIcon(ttl.createSpan({ cls: 'genui-chip-icon' }), 'pencil');
     ttl.createSpan({ text: this.p.t('draft') });
-    const copy = head.createEl('button', { cls: 'clickable-icon genui-writing-copy', attr: { 'aria-label': this.p.t('copy') } });
-    setIcon(copy, 'copy');
-    const text = n.children.map((c) => (c.text !== undefined ? c.text : '')).join('').trim();
-    copy.addEventListener('click', async () => { await navigator.clipboard.writeText(text); new Notice(this.p.t('copied')); });
     this.children(card.createDiv({ cls: 'genui-writing-body' }), n.children);
     return card;
   }

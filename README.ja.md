@@ -27,7 +27,7 @@ ChatGPT は画面部品を回答本文の中の記法として持っています
 
 **2. 新しい回答の JSX 風の記法**(2026年10月頃から):
 
-- `chatgpt-jsx` コードブロックの中: 枠組み `<box>` `<row>` `<col>` `<grid>`/`<grid-item>` `<list>`/`<list-item>` `<table>`/`<table-row>`/`<table-cell>`、文字 `<title>` `<text>` `<caption>` `<badge>`、`<divider/>` `<icon/>`、`<WritingBlock>`(コピーボタン付きの文章)、`<CodeBlock>`(コードブロック。Mermaid も描く)、`<Chart/>`(ChatGPT と同じ横棒、折れ線)、`<AsyncImageGroup/>`、ふつうの SVG 図。ChatGPT がテンプレートのコード(`{#each}` や式)で描く図は実行せず、代わりの表示を出す。入力部品(`<radio>` `<checkbox>` `<slider>` `<button>`)は操作できない形で表示。
+- `chatgpt-jsx` コードブロックの中: 枠組み `<box>` `<row>` `<col>` `<grid>`/`<grid-item>` `<list>`/`<list-item>` `<table>`/`<table-row>`/`<table-cell>`、文字 `<title>` `<text>` `<caption>` `<badge>`、`<divider/>` `<icon/>`、`<WritingBlock>`(枠付きの文章)、`<CodeBlock>`(コードブロック。Mermaid も描く)、`<Chart/>`(ChatGPT と同じ横棒、折れ線)、`<AsyncImageGroup/>`、ふつうの SVG 図。ChatGPT がテンプレートのコード(`{#each}` や式)で描く図は実行せず、代わりの表示を出す。入力部品(`<radio>` `<checkbox>` `<slider>` `<button>`)は操作できない形で表示。
 - 本文中のインラインコード: `` `<Cite …/>` `` → 出典チップ(押すとそのターンの `sources` 一覧が開く)、`` `<FileCite name="…" …/>` `` → ファイルのチップ、`` `<MemoryCite/>` `` → メモリのチップ、`` `<icon …/>` `` → アイコン、`` `<Entity value="…"/>` `` → 名前をそのまま文字で、`` `<AsyncImage query="…"/>` `` → 画像(後述)、`` `<badge>…</badge>` `` / `` `<text>…</text>` ``。
 
 ChatGPT のエクスポートには、各 `<Cite>` がどの検索結果を指すかが残っていません。そのためチップからは特定のページではなく、ターンの出典一覧が開きます。

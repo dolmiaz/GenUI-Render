@@ -62,7 +62,6 @@
   background: var(--background-secondary); color: var(--text-muted); border: 1px solid var(--background-modifier-border); vertical-align: baseline; white-space: nowrap; }
 .genui-chip[role="button"] { cursor: pointer; }
 .genui-chip[role="button"]:hover { color: var(--text-normal); background: var(--background-modifier-hover); }
-.genui-entity { text-decoration: underline dotted var(--text-faint); text-decoration-thickness: 1.5px; text-underline-offset: 4px; cursor: help; }
 .genui-icon { display: inline-flex; vertical-align: -0.15em; }
 .genui-icon svg { width: 1em; height: 1em; }
 .genui-icon.is-lg svg { width: 1.3em; height: 1.3em; }
