@@ -1,0 +1,10 @@
+{
+  "id": "genui-render",
+  "name": "GenUI Render",
+  "version": "0.1.0",
+  "minAppVersion": "1.4.0",
+  "description": "Draw ChatGPT's answer UI — maps, choice questions, stat cards, layouts, charts and source chips — from notes that keep the markup of a ChatGPT data export.",
+  "author": "dolmiaz",
+  "isDesktopOnly": false,
+  "authorUrl": "https://github.com/dolmiaz"
+}
