@@ -76,7 +76,7 @@
 /* chatgpt-jsx layout */
 .genui-jsx { display: flex; flex-direction: column; gap: 8px; }
 .genui-box { display: flex; flex-direction: column; min-width: 0; }
-.genui-row { display: flex; flex-direction: row; gap: 8px; min-width: 0; }
+.genui-row { display: flex; flex-direction: row; align-items: center; gap: 8px; min-width: 0; }
 .genui-grid { display: grid; gap: 8px; }
 .genui-bordered { border: 1px solid var(--background-modifier-border); }
 .genui-flow > :first-child { margin-top: 0; }
@@ -148,3 +148,7 @@ span.genui-badge { display: inline-flex; padding: 0 8px; }
 .genui-setting-sub { padding-left: 24px; }
 .genui-image.has-image { padding: 0; border: none; background: none; cursor: pointer; }
 .genui-image img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; display: block; }
+
+body { --genui-surface-2: var(--background-secondary); --genui-surface-3: var(--background-secondary-alt); }
+.theme-dark { --genui-surface-2: rgba(0, 0, 0, 0.28); --genui-surface-3: rgba(0, 0, 0, 0.18); }
+.genui-row > .genui-flow > p { margin: 0; }

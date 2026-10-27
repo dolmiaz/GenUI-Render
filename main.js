@@ -636,11 +636,14 @@ const COLOR = {
   success: 'var(--color-green)', danger: 'var(--color-red)', error: 'var(--color-red)', warning: 'var(--color-orange)',
   info: 'var(--color-blue)', primary: 'var(--text-normal)', secondary: 'var(--text-muted)', tertiary: 'var(--text-faint)',
   subtle: 'var(--background-modifier-border)', accent: 'var(--interactive-accent)',
+  default: 'var(--text-normal)', caution: 'var(--color-yellow)', yellow: 'var(--color-yellow)', gold: 'var(--color-yellow)', orange: 'var(--color-orange)',
+  red: 'var(--color-red)', green: 'var(--color-green)', blue: 'var(--color-blue)', purple: 'var(--color-purple)', pink: 'var(--color-pink)',
+  cyan: 'var(--color-cyan)', gray: 'var(--text-muted)', grey: 'var(--text-muted)', positive: 'var(--color-green)', negative: 'var(--color-red)',
 };
-const BG = { 'surface-secondary': 'var(--background-secondary)', 'surface-tertiary': 'var(--background-secondary-alt)', surface: 'var(--background-primary)' };
+const BG = { 'surface-secondary': 'var(--genui-surface-2)', 'surface-tertiary': 'var(--genui-surface-3)', surface: 'var(--background-primary)', 'surface-inverted': 'var(--text-normal)' };
 const RADIUS = { sm: '6px', md: '10px', lg: '14px', xl: '20px', full: '999px' };
 const SIZE = { xs: 'var(--font-ui-smaller)', sm: 'var(--font-ui-small)', md: 'inherit', lg: '1.15em', xl: '1.35em', '2xl': '1.6em' };
-const ALIGN = { start: 'flex-start', end: 'flex-end', center: 'center', stretch: 'stretch', baseline: 'baseline' };
+const ALIGN = { top: 'flex-start', bottom: 'flex-end', start: 'flex-start', end: 'flex-end', center: 'center', stretch: 'stretch', baseline: 'baseline' };
 const JUSTIFY = { start: 'flex-start', end: 'flex-end', center: 'center', between: 'space-between', around: 'space-around' };
 const len = (v) => (typeof v === 'number' ? v * 4 + 'px' : String(v));
 
@@ -663,7 +666,9 @@ class JsxRenderer {
 
   children(parent, nodes) {
     let md = '';
-    const flush = () => { this.flow(parent, md); md = ''; };
+    // In a row (and in one-line text parts) ChatGPT keeps icon + text on one line: line breaks there are spaces
+    const oneLine = parent.hasClass('genui-row') || parent.hasClass('genui-text') || parent.hasClass('genui-title') || parent.hasClass('genui-caption') || parent.hasClass('genui-badge');
+    const flush = () => { this.flow(parent, oneLine ? md.replace(/[ \t]*\n[ \t]*/g, ' ') : md); md = ''; };
     for (const n of nodes) {
       if (n.text !== undefined) md += dedent(n.text);
       else if (n.tag === 'Link') {
@@ -691,6 +696,8 @@ class JsxRenderer {
       if (a.width) el.style.width = len(a.width);
       if (a.flex !== undefined) el.style.flex = String(a.flex);
       if (a.align) el.style.alignItems = ALIGN[a.align] || a.align;
+      if (a.align === 'center' && n.tag !== 'row') el.style.textAlign = 'center';
+      if (a.textAlign) el.style.textAlign = a.textAlign;
       if (a.justify) el.style.justifyContent = JUSTIFY[a.justify] || a.justify;
       return el;
     };
@@ -713,6 +720,7 @@ class JsxRenderer {
         if (a.weight) el.style.fontWeight = a.weight === 'semibold' ? '600' : a.weight === 'bold' ? '700' : a.weight === 'medium' ? '500' : a.weight;
         if (a.color && n.tag !== 'badge') el.style.color = COLOR[a.color] || a.color;
         if (n.tag === 'badge' && a.color) el.addClass('is-' + a.color);
+        if (a.textAlign) el.style.textAlign = a.textAlign;
         return this.children(el, n.children);
       }
       case 'title': {
@@ -720,6 +728,7 @@ class JsxRenderer {
         if (a.size) el.style.fontSize = SIZE[a.size] || a.size;
         if (a.color) el.style.color = COLOR[a.color] || a.color;
         if (a.tabularNums) el.style.fontVariantNumeric = 'tabular-nums';
+        if (a.textAlign) el.style.textAlign = a.textAlign;
         return this.children(el, n.children);
       }
       case 'table': return this.children(parent.createDiv({ cls: 'genui-table' }), n.children);
